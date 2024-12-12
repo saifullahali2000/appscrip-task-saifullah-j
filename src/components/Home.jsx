@@ -18,6 +18,7 @@ import { BsHandbag } from "react-icons/bs";
 import { RiSearchLine } from "react-icons/ri";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 
 function Home() {
@@ -27,6 +28,10 @@ function Home() {
     const [selectedOption, setSelectedOption] = useState([]);
     const [heartStates, setHeartStates] = useState(Array(productDatas.length).fill(false));
     const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+    const [isModalOpen, setIsModalOpen] = useState(false); 
+    
+    const toggleModal = () => { setIsModalOpen(!isModalOpen)};
 
 
 
@@ -92,6 +97,21 @@ function Home() {
             </div>
             <div className={styles.navbar}>
                 <div className={styles.subNavTop}>
+                <div className={styles.hamburger}>
+
+                <GiHamburgerMenu className={styles.hamburgericon}onClick={toggleModal} /> 
+                {isModalOpen && ( 
+                    <div className={styles.modaloverlay}> 
+                            <button className={styles.modalclose} onClick={toggleModal}>&times;</button>
+                            <div className={styles.modal}>
+                                <p>SHOP</p>
+                                <p>SKILLS</p>
+                                <p>STORIES</p>
+                                <p>ABOUT</p>
+                                <p>CONTACT US</p>
+                            </div>
+                    </div>)}
+                </div>
                     <div className={styles.subNavTopIcons}><img src={img2} alt="" /></div>
                     <div className={styles.subNavTopIcons}>
                         <h1>LOGO</h1>
@@ -141,7 +161,7 @@ function Home() {
             <hr />
             <div className={styles.products}>
                 {!hideFilter && <div className={styles.filter}>
-                    <div class={styles.custome}>
+                    <div className={styles.custome}>
                         <input type="checkbox" />
                         <h2>CUSTOMIZABLE</h2>
                     </div>
@@ -284,7 +304,7 @@ function Home() {
                             <a href="">customercare@mettamuse.com</a>
                             <h2>CURRENCY</h2>
                             <div className={styles.footerFlag}>
-                                <img src={Flag} alt="flag"/>
+                                <img src={Flag} alt=""/>
                                 <h3>USD</h3>
                             </div>
                             <p>Transactions will be completed in Euros and a currency reference is available on hover.</p>
